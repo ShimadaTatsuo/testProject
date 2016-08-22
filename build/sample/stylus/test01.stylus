@@ -1,0 +1,4 @@
+body
+    background-color: #ccc
+    .main
+        font-size: 10px
