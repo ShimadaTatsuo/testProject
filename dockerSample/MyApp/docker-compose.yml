@@ -1,0 +1,11 @@
+version: '3'
+services:
+  webserver:
+    build: ./Node
+    image: node-express:1.0
+    container_name: node
+    tty: true
+    volumes:
+      - ./Node/app:/app
+    ports:
+      - "8080:3000"

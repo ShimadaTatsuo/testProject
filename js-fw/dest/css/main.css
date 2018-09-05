@@ -1,0 +1,20 @@
+body {
+  background: #fff;
+}
+.number__button {
+  margin-top: 10px;
+  display: none;
+}
+.js-parts-list {
+  list-style-type: none;
+}
+.js-parts-list li {
+  float: left;
+  margin-right: 20px;
+  padding: 10px;
+  border: 1px solid #eee;
+  cursor: pointer;
+}
+.js-parts-list li.is-active {
+  background: #eee;
+}
