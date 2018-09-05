@@ -1,0 +1,248 @@
+set nocompatible
+if has('vim_starting')
+    set runtimepath+=~/.vim/bundle/neobundle.vim
+endif
+call neobundle#begin(expand('~/.vim/bundle/'))
+NeoBundleFetch 'Shougo/neobundle.vim'
+NeoBundle 'Shougo/neobundle.vim'
+
+" NeoBundle 'Shougo/unite.vim'
+NeoBundle 'easymotion/vim-easymotion'               " word jump
+NeoBundle 'scrooloose/nerdtree'                     " Explorer
+NeoBundle 'Townk/vim-autoclose'                     " 閉じタグ
+NeoBundle 'surround.vim'                            " 文字列囲み
+NeoBundle 'mattn/emmet-vim'                         " emmet
+NeoBundle 'Shougo/neocomplcache'
+NeoBundle 'Shougo/neosnippet.vim'
+NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/vimproc'
+NeoBundle 'dyng/ctrlsf.vim'
+NeoBundle 'terryma/vim-multiple-cursors'
+NeoBundle 'kien/ctrlp.vim'
+NeoBundle 'tacahiroy/ctrlp-funky'
+NeoBundle 'itchyny/lightline.vim'                   " vim status line
+" NeoBundle 'Yggdroot/indentLine'                     " display indent
+NeoBundle 'airblade/vim-gitgutter'                  " display git diff
+NeoBundle 'tomasr/molokai'
+
+" NeoBundle 'hail2u/vim-css3-syntax'
+NeoBundle 'crusoexia/vim-monokai'                   " カラースキーム
+NeoBundle 'othree/yajs.vim'                         " es6のハイライト
+NeoBundle 'othree/es.next.syntax.vim'               " stage0のハイライト
+NeoBundle 'othree/javascript-libraries-syntax.vim'  " 他jsのハイライト
+NeoBundle 'maxmellon/vim-jsx-pretty'                " jsxのハイライト
+NeoBundle 'JulesWang/css.vim'
+NeoBundle 'cakebaker/scss-syntax.vim'
+NeoBundle 'elzr/vim-json'
+" NeoBundle 'majutsushi/tagbar.git'
+" NeoBundle 'pangloss/vim-javascript'
+" NeoBundle 'crusoexia/vim-javascript-lib'
+" NeoBundle 'marijnh/tern_for_vim', {
+"  \ 'build': {
+"  \   'others': 'npm install'
+"  \}}
+
+call neobundle#end()
+filetype plugin indent on
+
+syntax on
+au BufRead,BufNewFile *.jsx set filetype=javascript.jsx
+au BufRead,BufNewFile *.scss set filetype=sass
+autocmd Colorscheme monokai highlight javascriptIdentifier ctermfg=208
+autocmd Colorscheme monokai highlight Special ctermfg=208
+autocmd FileType scss colorscheme molokai
+autocmd FileType scss set iskeyword+=-
+colorscheme monokai
+set t_Co=256
+" set termguicolors
+
+set splitbelow  "tern_for_vim用 ガイドを下に表示
+set completeopt-=preview
+
+set laststatus=2
+set hidden
+set backspace=indent,eol,start " バックスペースでなんでも消せるように "
+set autoread
+set number "行番号を表示する
+set title "編集中のファイル名を表示
+set whichwrap=b,s,<,>,[,]
+set showmatch "括弧入力時の対応する括弧を表示
+
+set smarttab
+set shiftwidth=2    "行頭での<Tab>の幅
+set tabstop=2   "行頭以外での<Tab>の幅
+set softtabstop=2   "expandtabで<Tab>が対応する<Space>の数"
+set expandtab   "<Tab>の代わりに<Space>を挿入する
+set hlsearch    "検索結果をハイライト表示
+set mouse=a     " マウススクロール
+
+set smartindent "オートインデント
+set ignorecase "大文字/小文字の区別なく検索する
+set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
+set wrapscan "検索時に最後まで行ったら最初に戻る
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,iso-2022-jp,sjis,euc-jp
+set ambiwidth=double
+
+" 行の色
+set cursorline
+highlight CursorLine ctermbg=234
+" highlight Normal ctermbg=none
+
+set wildmenu "コマンドラインの補完
+set synmaxcol=300 "1行あたりの読み込み文字数
+
+" let g:molokai_original = 1
+" let g:rehash256 = 1
+
+"隠しファイルを表示する。
+let NERDTreeShowHidden = 1
+let g:neocomplcache_enable_at_startup = 1
+let g:neocomplcache_enable_camel_case_completion = 1
+let g:neocomplcache_enable_underbar_completion = 1
+let g:neocomplcache_smart_case = 1
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_manual_completion_start_length = 0
+let g:neocomplcache_caching_percent_in_statusline = 1
+let g:neocomplcache_enable_skip_completion = 1
+let g:neocomplcache_skip_input_time = '0.5'
+
+set clipboard+=unnamed
+
+set list
+set listchars=tab:»-,trail:-
+
+set display=lastline "長文を表示させる
+
+" エクスプローラーを開く
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+
+" 直近の検索結果ハイライトを消す
+nnoremap <ESC><ESC> :noh<CR>
+
+" diff
+cnoremap df vertical diffsplit
+
+augroup HighlightTrailingSpaces
+  autocmd!
+  autocmd VimEnter,WinEnter,ColorScheme * highlight TrailingSpaces term=underline guibg=Red ctermbg=Red
+  autocmd VimEnter,WinEnter * match TrailingSpaces /\s\+$/
+augroup END
+
+function! ZenkakuSpace()
+    highlight ZenkakuSpace cterm=underline ctermfg=lightblue guibg=darkgray
+endfunction
+
+if has('syntax')
+    augroup ZenkakuSpace
+        autocmd!
+        autocmd ColorScheme * call ZenkakuSpace()
+        autocmd VimEnter,WinEnter,BufRead * let w:m1=matchadd('ZenkakuSpace', '　')
+    augroup END
+    call ZenkakuSpace()
+endif
+
+
+" Plugin key-mappings.
+"imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+"xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+" SuperTab like snippets behavior.
+" imap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+" smap <expr><TAB> neosnippet#expandable_or_jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+" inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+
+"imap <expr><TAB> pumvisible() ? "\<C-n>" : neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+"inoremap <expr><S-TAB>  pumvisible() ? "\<C-p>" : "\<S-TAB>"
+
+imap <expr><CR> neosnippet#expandable() <bar><bar> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? neocomplcache#close_popup() : "<CR>"
+imap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : pumvisible() ? "\<C-n>" : "\<TAB>"
+smap <expr><TAB> neosnippet#jumpable() ? "\<Plug>(neosnippet_expand_or_jump)" : "\<TAB>"
+
+" 補完候補が表示されている場合は確定。そうでない場合は改行
+"inoremap <expr><CR>  pumvisible() ? neocomplcache#close_popup() : "<CR>"
+" 補完をキャンセル
+inoremap <expr><C-e>  neocomplcache#close_popup()
+
+let g:neosnippet#snippets_directory = '~/.vim/snippets/'
+
+" For snippet_complete marker.
+if has('conceal')
+  set conceallevel=2 concealcursor=i
+endif
+
+
+" indentLine
+let g:indentLine_faster = 1
+let g:indentLine_fileTypeExclude = ['help', 'nerdtree', 'calendar', 'thumbnail', 'tweetvim']
+
+let g:vim_json_syntax_conceal = 0
+" nmap <F8> :TagbarToggle<CR>
+
+map <Space> <Plug>(easymotion-prefix)
+let g:EasyMotion_do_mapping = 0 " Disable default mappings
+
+" Jump to anywhere you want with minimal keystrokes, with just one key binding.
+" `s{char}{label}`
+" nmap s <Plug>(easymotion-overwin-f)
+" or
+" `s{char}{char}{label}`
+" Need one more keystroke, but on average, it may be more comfortable.
+nmap <Space> <Plug>(easymotion-overwin-f2)
+
+" Turn on case insensitive feature
+let g:EasyMotion_smartcase = 1
+
+" JK motions: Line motions
+map fj <Plug>(easymotion-j)
+map fk <Plug>(easymotion-k)
+
+noremap <Space>h  ^
+noremap <Space>l  $
+
+" target replace
+noremap <F2>  <kMultiply>:%s;;;g<Left><Left>
+
+" target grep
+noremap <expr> <F3>  ':CtrlSF ' . expand("<cword>") . '<CR>'
+noremap <expr> <F12>  ':CtrlPFunky ' . expand('<cword>') . '<CR>'
+
+" indentline color
+let g:indentLine_color_term = 240
+
+" javascript open import file
+function! ReadJSFile() abort
+  let s:currentPos = col('.')
+  let s:colNum = s:currentPos - 1
+  let s:lastPos = len(getline('.'))
+  let s:fileName = ''
+
+  while s:colNum > -1
+    if getline('.')[s:colNum] =~ "\['\"\]"
+      break
+    end
+    let s:fileName =  getline('.')[s:colNum] . s:fileName
+    let s:colNum = s:colNum - 1
+  endwhile
+  while s:currentPos < s:lastPos
+    if getline('.')[s:currentPos] =~ "\['\"\]"
+      break
+    end
+    let s:fileName =  s:fileName . getline('.')[s:currentPos]
+    let s:currentPos = s:currentPos + 1
+  endwhile
+  let s:fullName = simplify(expand("%:h") . '/' . s:fileName)
+  if !filereadable(s:fullName)
+    if isdirectory(s:fullName)
+      let s:fullName = s:fullName . '/index.js'
+    else
+      let s:fullName = s:fullName . '.js'
+    endif
+  endif
+  execute ':tabe ' . s:fullName
+endfunction
+autocmd FileType javascript nmap gf  :call ReadJSFile()<CR>
+
