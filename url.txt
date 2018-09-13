@@ -1,1 +1,8 @@
 https://codesandbox.io/s/485rw80y0
+
+bottom close
+  ver1
+    https://codesandbox.io/s/1v7pwk5q3j
+  ver2
+    https://codesandbox.io/s/4z306q23zx
+  ver3
