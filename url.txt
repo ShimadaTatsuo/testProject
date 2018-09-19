@@ -17,6 +17,9 @@ Drawer
   preview
     https://codesandbox.io/embed/yn1z37n4x
 
+reactでやるか、html構成を変更して、cssでまとめるか
+でないと、openフラグのclassをいくつも書いて、jsでdomゴリゴリになる。。。
+
 
 https://codesandbox.io/embed/ko89on1k13?codemirror=1
 リファクタ
