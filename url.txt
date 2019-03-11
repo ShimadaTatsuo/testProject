@@ -121,3 +121,78 @@ no if
 https://www.seleqt.net/programming/eliminatetheswitchstatementforbettercode/
 no comment
 https://www.hassy-blog.com/entry/how_to_write_code_without_comments/
+
+
+
+/* eslint-disable */
+console.log(location.href)
+
+const baseURL = location.href
+
+// match, equals
+/*
+* match  マッチ、含む
+* equals 完全一致
+*/
+const hide = [
+  {
+    url: "http://localhost:8080/aaa",
+    match: "match",
+  },
+  {
+    url: "http://test.com/eee",
+    match: "equals",
+  },
+  {
+    url: "http://test.com/fff",
+    match: "equals",
+  },
+]
+
+// .* > 存在しなくてもよい
+// .+ > なにかしら文字列が必要 一文字以上の任意の文字列
+const show = [
+  {
+    url: "http://localhost:8080/aaa/",
+    match: "equals",
+    pattern: "a",
+  },
+  {
+    url: "http://localhost:8080/bbb/",
+    match: "equals",
+    pattern: "b",
+  },
+  {
+    url: "http://localhost:8080/.+",
+    match: "match",
+    pattern: "c",
+  },
+]
+
+// const hideTarget = hide.some(url => {
+//   console.log(url)
+//   console.log(new RegExp(url))
+//   console.log(new RegExp(url).test(baseURL))
+//   return new RegExp(url).test(baseURL)
+// })
+// console.log(hideTarget)
+
+const target = show.filter(obj => {
+  if (obj.match === "equals") {
+    return obj.url === baseURL
+  } else if (obj.match === "match") {
+    return new RegExp(obj.url).test(baseURL)
+  }
+  return false
+})
+
+console.log(target.length)
+
+if (!target.length || target.length >= 2) {
+  console.log("target none or multi")
+  // return
+}
+
+const showObj = target[0]
+
+console.log(showObj)
