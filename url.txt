@@ -136,7 +136,7 @@ const baseURL = location.href
 */
 const hide = [
   {
-    url: "http://localhost:8080/aaa",
+    url: "http://localhost:8080/aaa$",
     match: "match",
   },
   {
@@ -149,33 +149,40 @@ const hide = [
   },
 ]
 
+const hideTarget = hide.filter(obj => {
+  if (obj.match === "equals") {
+    return obj.url === baseURL
+  } else if (obj.match === "match") {
+    return new RegExp(obj.url).test(baseURL)
+  }
+  return false
+})
+
+if (hideTarget.length) {
+  console.log("exist hide target")
+  // return
+}
+
 // .* > 存在しなくてもよい
 // .+ > なにかしら文字列が必要 一文字以上の任意の文字列
 const show = [
   {
     url: "http://localhost:8080/aaa/",
     match: "equals",
-    pattern: "a",
+    pattern: "patternA",
   },
   {
     url: "http://localhost:8080/bbb/",
     match: "equals",
-    pattern: "b",
+    pattern: "patternB",
   },
   {
     url: "http://localhost:8080/.+",
     match: "match",
-    pattern: "c",
+    pattern: "patternC",
   },
 ]
 
-// const hideTarget = hide.some(url => {
-//   console.log(url)
-//   console.log(new RegExp(url))
-//   console.log(new RegExp(url).test(baseURL))
-//   return new RegExp(url).test(baseURL)
-// })
-// console.log(hideTarget)
 
 const target = show.filter(obj => {
   if (obj.match === "equals") {
@@ -193,6 +200,50 @@ if (!target.length || target.length >= 2) {
   // return
 }
 
-const showObj = target[0]
+const setting = {
+  patternA: {
+    startShow: true,
+    buttonNum: 2, // default 1
+    menuList1: [
+      {
+        text: "aaa",
+        url: "#",
+      },
+      {
+        text: "bbb",
+        url: "#",
+      },
+    ],
+    menuList2: [
+      {
+        text: "aaa",
+        url: "#",
+      },
+      {
+        text: "bbb",
+        url: "#",
+      },
+    ],
+  },
+  patternB: {
+    startShow: false,
+    buttonNum: 1, // default 1
+    menuList1: [
+      {
+        text: "aaa",
+        url: "#",
+      },
+      {
+        text: "bbb",
+        url: "#",
+      },
+    ],
+  },
+}
 
+const showObj = target[0]
 console.log(showObj)
+const targetConfig = showObj["pattern"]
+console.log(targetConfig)
+console.log(setting[targetConfig])
+
