@@ -1,0 +1,194 @@
+{
+  // * vim settings
+
+  // Map Leaderの設定
+  "vim.leader": "<space>",
+
+  // easymotionの利用有無
+  "vim.easymotion": true,
+
+  // ビジュアルモードのとき"*"で検索できるようにする
+  "vim.visualstar": true,
+
+  // 指定したコマンドで、VSCode（またはVSCodeVim）の機能を使わないようにする
+  "vim.handleKeys": {
+    "<C-d>": true // <C-d>はVSCodeVimのものを使う
+  },
+
+  // クリップボードをレジスタとして使う
+  "vim.useSystemClipboard": true,
+
+  // 検索で同じ文字列に色がつくやつ
+  "vim.hlsearch": true,
+
+  // 検索時には大文字小文字を無視
+  "vim.ignorecase": true,
+
+  // 入力中でもマッチしたものを表示してくれる
+  "vim.incsearch": true,
+
+  // 行の最初と最後でのカーソル移動時、行送りできるようにする
+  "vim.whichwrap": "h,l,<,>,[,]",
+
+  "vim.normalModeKeyBindingsNonRecursive": [
+    // 検索するためのキーをfから変えたい場合は､ここを変更する
+    {
+      "before": ["leader", "f"],
+      "after": ["leader", "leader", "s"]
+    },
+
+    // neo vimで変更されたように"Y"を"D"とか"C"みたいな感じでつかいたい（デフォルトだとVimと同様に"yy"の挙動）
+    {
+      "before": ["Y"],
+      "after": ["y", "$"]
+    },
+
+    // デフォルトの"H"と"L"は使わないので別のものを割り当てる
+    // ^は押しづらいので"H"で行頭
+    {
+      "before": ["<C-h>"],
+      "after": ["^"]
+    },
+
+    // $は押しづらいので"L"で行末
+    {
+      "before": ["<C-l>"],
+      "after": ["$"]
+    },
+
+    // 現在の行の下に空の行を挿入
+    {
+      "before": ["<Leader>", "o"],
+      "after": ["o", "<ESC>"]
+    },
+
+    // 現在の行の上に空の行を挿入
+    {
+      "before": ["<Leader>", "O"],
+      "after": ["O", "<ESC>"]
+    },
+
+    // 検索結果に遷移したとき画面中央に表示する
+    {
+      "before": ["n"],
+      "after": ["n", "z", "z"]
+    },
+    {
+      "before": ["N"],
+      "after": ["N", "z", "z"]
+    },
+    {
+      "before": ["*"],
+      "after": ["*", "z", "z"]
+    },
+    {
+      "before": ["#"],
+      "after": ["#", "z", "z"]
+    }
+
+    // US配列でコマンドモードに入りやすいように":"と";"を入れ替えている
+    // {
+    //   "before": [";"],
+    //   "after": [":"]
+    // },
+    // {
+    //   "before": [":"],
+    //   "after": [";"]
+    // }
+  ],
+
+  "vim.insertModeKeyBindings": [
+    {
+      "before": ["j", "j"],
+      "after": ["<Esc>"]
+    }
+  ],
+
+  "workbench.startupEditor": "none",
+  "git.openRepositoryInParentFolders": "never",
+
+  "[typescript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescriptreact]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[javascript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "diffEditor.ignoreTrimWhitespace": false,
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[scss]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": true
+  },
+
+  // 保存時にformat
+  "editor.formatOnSave": true,
+
+  // 現在の行番号含めて強調表示する
+  "editor.renderLineHighlight": "all",
+
+  // tabをスペースとして扱う
+  "editor.insertSpaces": true,
+
+  // エディタ上での空白表示設定
+  "editor.renderWhitespace": "boundary",
+
+  // 制御文字の表示
+  "editor.renderControlCharacters": true,
+
+  // auto indentを入れる
+  "editor.autoIndent": "full",
+
+  // ignore spell checker word
+  "cSpell.userWords": [
+    "autoincrement",
+    "Automerge",
+    "datasource",
+    "donot",
+    "easymotion",
+    "esbenp",
+    "hlsearch",
+    "ignorecase",
+    "incsearch",
+    "nestjs",
+    "tanstack",
+    "typeorm",
+    "visualstar",
+    "whichwrap"
+  ],
+
+  // ミニマップの非表示
+  "editor.minimap.enabled": false,
+
+  // アクティビティバーの非表示
+  "workbench.activityBar.location": "hidden",
+
+  // macrosプラグインを使って、ファイルを開くと同時にサイドバーを閉じるコマンドを登録
+  "macros": {
+    "selectAndToggleSidebar": [
+      "list.select",
+      "workbench.action.toggleSidebarVisibility"
+    ]
+  },
+  "typescript.updateImportsOnFileMove.enabled": "never",
+  "liveServer.settings.donotShowInfoMsg": true,
+  "liveServer.settings.root": "/dist"
+}

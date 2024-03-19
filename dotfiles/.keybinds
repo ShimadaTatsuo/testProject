@@ -1,0 +1,68 @@
+// 既定値を上書きするには、このファイル内にキー バインドを挿入します
+[
+  //explorer表示トグル(サイドバーの表示・非表示)
+  {
+    "key": "ctrl+e",
+    "command": "workbench.view.explorer",
+    "when": "!explorerViewletVisible && vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
+  },
+  {
+    "key": "ctrl+e",
+    "command": "workbench.action.toggleSidebarVisibility",
+    "when": "explorerViewletVisible && !searchViewletVisible && !inDebugMode && vim.mode != 'SearchInProgressMode' && vim.mode != 'Insert'"
+  },
+
+  {
+    "key": "t",
+    "command": "macros.selectAndToggleSidebar",
+    "when": "explorerViewletFocus && explorerViewletVisible && !explorerResourceIsFolder && !inputFocus"
+  },
+
+  //エクスプローラー間移動
+  {
+    "key": "j",
+    "command": "list.focusDown",
+    "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+  },
+
+  {
+    "key": "k",
+    "command": "list.focusUp",
+    "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+  },
+
+  //新規ファイル作成
+  {
+    "key": "n",
+    "command": "explorer.newFile",
+    "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+  },
+
+  //新規フォルダ作成
+  {
+    "key": "f",
+    "command": "explorer.newFolder",
+    "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+  },
+
+  //エクスプローラーでフォルダを開く
+  {
+    "key": "e",
+    "command": "revealFileInOS",
+    "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+  },
+
+  //リネーム
+  {
+    "key": "r",
+    "command": "renameFile",
+    "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+  },
+
+  //削除
+  {
+    "key": "d",
+    "command": "deleteFile",
+    "when": "explorerViewletFocus && explorerViewletVisible && !inputFocus"
+  }
+]
